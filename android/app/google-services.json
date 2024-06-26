@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762905737069",
+    "project_id": "phoneauth-cfbb9",
+    "storage_bucket": "phoneauth-cfbb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762905737069:android:4cdd46c8408181e08dcc64",
+        "android_client_info": {
+          "package_name": "com.example.phoneauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATL3WwxZdVzu8_-muPVoEfIyKyyCyjV_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

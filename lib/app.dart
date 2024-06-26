@@ -29,7 +29,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: TAppTheme.lightTheme,
-      home: const OnBoardingScreen(),
+      home: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }
