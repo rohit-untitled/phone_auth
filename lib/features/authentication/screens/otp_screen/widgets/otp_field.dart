@@ -2,22 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:phoneauth/utils/constants/colors.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpField extends StatefulWidget {
-  const OtpField({super.key});
-
-  @override
-  State<OtpField> createState() => _OtpFieldState();
-}
-
-class _OtpFieldState extends State<OtpField> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
 class OTPfield extends StatefulWidget {
-  const OTPfield({super.key});
+  const OTPfield({super.key, required this.onCompleted});
+  final void Function(String) onCompleted;
 
   @override
   _OTPfieldState createState() => _OTPfieldState();
@@ -65,9 +52,7 @@ class _OTPfieldState extends State<OTPfield> {
         controller: controller,
         focusNode: focusNode,
         defaultPinTheme: defaultPinTheme,
-        onCompleted: (pin) {
-          setState(() => showError = pin != '5555');
-        },
+        onCompleted: widget.onCompleted,
         focusedPinTheme: defaultPinTheme.copyWith(
           height: 60,
           width: 60,

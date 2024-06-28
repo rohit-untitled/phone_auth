@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:phoneauth/features/authentication/screens/otp_screen/otp.dart';
 import 'package:phoneauth/utils/constants/colors.dart';
+import 'package:phoneauth/utils/validators/validation.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
+import '../../../controllers/login/login_controller.dart';
 
 class TLoginForm extends StatelessWidget {
   const TLoginForm({
@@ -15,24 +16,18 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(LoginController());
+    final controller = Get.put(LoginController());
+    final formKey = GlobalKey<FormState>();
     return Form(
-      // key: controller.loginFormKey,
+      key: formKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
           children: [
-            //Email
-            // TextFormField(
-            //   // controller: controller.email,
-            //   // validator: (value) => TValidator.validateEmail(value),
-            //   decoration: const InputDecoration(
-            //       prefixIcon: Icon(Iconsax.direct_right),
-            //       labelText: TTexts.phoneNo),
-            // ),
-
             // phone number text field
-            TextField(
+            TextFormField(
+              controller: controller.phoneNo,
+              validator: (value) => TValidator.validatePhoneNumber(value),
               keyboardType: TextInputType.phone,
               cursorColor: TColors.primary,
               inputFormatters: [
@@ -52,7 +47,7 @@ class TLoginForm extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       fontFamily: 'Poppins',
                     ),
                   ),
@@ -86,7 +81,7 @@ class TLoginForm extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16.0,
                 fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
               ),
             ),
 
@@ -96,9 +91,14 @@ class TLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                // onPressed: () =>
-                //      controller.emailAndPasswordSignIn(),
-                onPressed: () => Get.to(() => const OtpScreen()),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    String phoneNumber = '+91${controller.phoneNo.text.trim()}';
+                    print('Phone Number: $phoneNumber');
+                    LoginController.instance.phoneAuthentication(phoneNumber);
+                    Get.to(() => OtpScreen(phoneNumber: phoneNumber));
+                  }
+                },
                 child: const Text(TTexts.proceed),
               ),
             ),
