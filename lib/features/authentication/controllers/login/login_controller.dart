@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:phoneauth/data/repositories/authentication_repository.dart';
 import '../../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../../utils/exceptions/format_exceptions.dart';
 import '../../../../utils/exceptions/platform_exceptions.dart';
+import '../../../../utils/popups/loaders.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
@@ -18,6 +20,13 @@ class LoginController extends GetxController {
 
   Future<void> phoneAuthentication(String phoneNo) async {
     try {
+      // Check for internet connectivity
+      var connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.none) {
+        TLoaders.errorSnackBar(
+            title: 'Oh Snap', message: 'No internet connection');
+        return;
+      }
       await AuthenticationRepository.instance.phoneAuthentication(phoneNo);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;

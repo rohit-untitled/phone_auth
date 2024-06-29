@@ -94,7 +94,7 @@ class TLoginForm extends StatelessWidget {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     String phoneNumber = '+91${controller.phoneNo.text.trim()}';
-                    print('Phone Number: $phoneNumber');
+                    // print('Phone Number: $phoneNumber');
                     LoginController.instance.phoneAuthentication(phoneNumber);
                     Get.to(() => OtpScreen(phoneNumber: phoneNumber));
                   }
