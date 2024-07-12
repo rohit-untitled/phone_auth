@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'features/personalization/screens/user_details/user_info.dart';
 import 'utils/theme/theme.dart';
 
 class MyApp extends StatelessWidget {
