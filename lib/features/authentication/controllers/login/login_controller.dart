@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:phoneauth/data/repositories/authentication_repository.dart';
+import 'package:phoneauth/data/authentication/authentication_repository.dart';
 
 import '../../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../../utils/exceptions/format_exceptions.dart';

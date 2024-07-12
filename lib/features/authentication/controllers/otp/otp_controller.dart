@@ -2,8 +2,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:phoneauth/data/repositories/authentication_repository.dart';
-import 'package:phoneauth/features/personalization/home/home.dart';
+import 'package:phoneauth/data/authentication/authentication_repository.dart';
+import 'package:phoneauth/features/personalization/screens/home.dart';
 
 import '../../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../../utils/exceptions/format_exceptions.dart';

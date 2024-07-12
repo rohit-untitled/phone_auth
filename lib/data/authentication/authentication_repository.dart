@@ -6,7 +6,7 @@ import 'package:phoneauth/features/authentication/screens/login/login.dart';
 import 'package:phoneauth/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:phoneauth/utils/popups/loaders.dart';
 
-import '../../features/personalization/home/home.dart';
+import '../../features/personalization/screens/home.dart';
 import '../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../utils/exceptions/format_exceptions.dart';
 import '../../utils/exceptions/platform_exceptions.dart';
@@ -91,6 +91,10 @@ class AuthenticationRepository extends GetxController {
       return false;
     }
   }
+
+  // check Existing user 
+
+  // save user to database
 
   //logout
   Future<void> logout() async {

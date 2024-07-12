@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phoneauth/data/repositories/authentication_repository.dart';
+import 'package:phoneauth/data/authentication/authentication_repository.dart';
 import 'package:phoneauth/utils/constants/sizes.dart';
 import 'package:phoneauth/utils/constants/text_strings.dart';
 
