@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,11 @@ import '../../../personalization/screens/user_details/username_form.dart';
 class OTPController extends GetxController {
   static OTPController get instance => Get.find();
 
+  var isResendButtonEnabled = false.obs;
+  var countdownTime = 30.obs;
+
+
+  // verify otp 
   Future<void> verifyOTP(String otp) async {
     try {
       // Check for internet connectivity
@@ -44,6 +51,34 @@ class OTPController extends GetxController {
     }
   }
 
+  // resend timer
+  void startResendOtpTimer() {
+    countdownTime.value = 30; // set the countdown time in seconds
+    isResendButtonEnabled.value = false;
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (countdownTime.value > 0) {
+        countdownTime.value--;
+      } else {
+        timer.cancel();
+        isResendButtonEnabled.value = true;
+      }
+    });
+  }
+
+  // resend button
+  Future<void> resendOtp(String phoneNumber) async {
+    try {
+      // Assuming phoneAuthentication is a function in AuthenticationRepository
+      await AuthenticationRepository.instance.phoneAuthentication(phoneNumber);
+      startResendOtpTimer(); // Restart the timer after resending OTP
+      TLoaders.customToast(message: 'OTP resent successfully.');
+    } catch (e) {
+      TLoaders.errorSnackBar(
+          title: 'Error resending OTP', message: e.toString());
+    }
+  }
+
+  // navigation on user existence
   void _navigateBasedOnUserExistence() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
@@ -69,5 +104,3 @@ class OTPController extends GetxController {
     }
   }
 }
-
-
